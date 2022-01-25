@@ -1,8 +1,8 @@
-public class bil3 {
+ public class bil3 {
     private String bilnummer;
-
-    public bil3(String id){
-        bilnummer = id; 
+    
+    public bil3(String bilnummer){
+        this.bilnummer = bilnummer; 
     }
     public void printMeg(){
         System.out.println("jeg er en bil. Mitt billnummer er " + this.bilnummer);
@@ -15,8 +15,8 @@ public class bil3 {
 class person{
     private bil3 bil;
 
-    public person(bil3 ob){
-        bil = ob;
+    public person(bil3 bil){
+        this.bil = bil;
     }
     public void utskriftPersonBilnummer(){
         System.out.println(bil.hentBilnummer());
@@ -25,7 +25,7 @@ class person{
 
 class BilBruk3{
     public static void main(String[] args) {
-        bil3 bilObj = new bil3("123");
+        bil3 bilObj = new bil3("69420");
         person personObj = new person(bilObj);
         personObj.utskriftPersonBilnummer();
 
