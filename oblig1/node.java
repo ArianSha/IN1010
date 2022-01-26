@@ -6,10 +6,11 @@ public class node{
         this.minne = minne;
         this.cpu = cpu;
     }
-    public antProsessorer(){
+    public int antProsessorer(){
         return cpu;
     }
-    public antMinne(){
+    public int antMinne(){
         return minne;
     }
+    
 }

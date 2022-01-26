@@ -3,10 +3,9 @@ import java.util.ArrayList;
 public class dataklynge {
     private ArrayList<rack> racks = new ArrayList<rack>();
 
-    // check last element in list
     public void leggInnNode(node nodeObj){
         for(rack rackObj: racks){
-            if(rackObj.noder.length < 12){
+            if(rackObj.rackErFull() == false){
                 rackObj.leggInnNode(nodeObj);
                 return;
             }
@@ -14,9 +13,9 @@ public class dataklynge {
         rack nyRackObj = new rack();
         racks.add(nyRackObj);
         racks.get(racks.size()-1).leggInnNode(nodeObj);
-    }
+    }   
 
-    public antProsessorer(){
+    public int antProsessorer(){
         int antProsessorer = 0; 
         
         for(rack rackObj: racks){
@@ -26,30 +25,23 @@ public class dataklynge {
         return antProsessorer;
     }
 
-    public noderMedNokMinner(int paakrevdMinne){
+    public int noderMedNokMinner(int paakrevdMinne){
         int noderMedMinne = 0;
 
         for(rack rackObj: racks){
-            int nodeObjMinne = rackObj.nokMinne(paakrevdMinne);
-            noderMedMinne += nodeObjMinne;
+            if(rackObj != null){
+                int nodeObjMinne = rackObj.nokMinne(paakrevdMinne);
+                noderMedMinne += nodeObjMinne;
+            }
         }
         return noderMedMinne;
     }
 
-}
-
-class hovedprogram{
-    public static void main(String[] args) {
-        dataklynge saga = new dataklynge();
-        for (i=0; i<450; i++){
-            node nyNode = new node();
-            saga.leggInnNode(nyNode);
-
-        }
-
-
+    public int antallRacks(){
+        return racks.size();
     }
 }
+
 
 
 
