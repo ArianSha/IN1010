@@ -1,8 +1,8 @@
-public class node{
+public class Node{
     private int minne;
     private int cpu;
 
-    public node(int minne, int cpu){
+    public Node(int minne, int cpu){
         this.minne = minne;
         this.cpu = cpu;
     }

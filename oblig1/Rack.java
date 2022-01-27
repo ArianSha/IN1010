@@ -1,16 +1,15 @@
 
-public class rack{
-    node[] noder = new node[12];
+public class Rack{
+    Node[] noder = new Node[12];
     private int nodeIRack = 0;
 
-    public boolean leggInnNode(node nodeObj){
+    public boolean leggInnNode(Node nodeObj){
         
         for(int i = 0; i < noder.length; i++) {
             if(noder[i] == null) {
                 noder[i] = nodeObj;
                 nodeIRack++;
                 return true;
-
             }
         }
         return false;
@@ -19,7 +18,7 @@ public class rack{
     public int antProsessorer(){
         int antProsessorer = 0;
         
-        for (node nodeObj: noder){
+        for (Node nodeObj: noder){
             if (nodeObj != null){
                 int nodeAntProsessor = nodeObj.antProsessorer();
                 antProsessorer += nodeAntProsessor;
@@ -28,10 +27,10 @@ public class rack{
         return antProsessorer;
      }
 
-    public int nokMinne(int paakrevdMinne){
+    public int noderMedNokMinne(int paakrevdMinne){
         int noderMedMinne = 0;
 
-        for(node nodeObj: noder){
+        for(Node nodeObj: noder){
             if (nodeObj != null){
                 int nodeMinne = nodeObj.antMinne();
                 if (paakrevdMinne <= nodeMinne){
