@@ -3,16 +3,15 @@ public class Rack{
     Node[] noder = new Node[12];
     private int nodeIRack = 0;
 
-    public boolean leggInnNode(Node nodeObj){
+    public void leggInnNode(Node nodeObj){
         
         for(int i = 0; i < noder.length; i++) {
             if(noder[i] == null) {
                 noder[i] = nodeObj;
                 nodeIRack++;
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     public int antProsessorer(){
