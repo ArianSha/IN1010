@@ -1,10 +1,10 @@
 public abstract class Legemiddel{
     static int instanser = 0;
-    protected Integer ID;
+    protected int ID;
 
     protected String navn;
-    protected Integer prisKr;
-    protected Double virkestoff;
+    protected int prisKr;
+    protected double virkestoff;
 
     public Legemiddel(String navn, int prisKr, double virkestoff){
         this.navn = navn;
@@ -13,12 +13,16 @@ public abstract class Legemiddel{
         ID = instanser + 1;
         instanser += 1;
     }
+    public int hentId() {return ID;}
     public String hentNavn(){return navn;}
-    public Integer hentId() {return ID;}
-    public String hentPris(){return prisKr.toString();}
-    public String hentVirkestoff(){return virkestoff.toString();}
+    public int hentPris(){return prisKr;}
+    public double hentVirkestoff(){return virkestoff;}
 
     public void settNyPris(int nyPris){prisKr = nyPris;}
+
+    public String toString(){
+        return "ID: " + ID + "\n" + "Navn: " + navn + "\n" + "Pris: " + prisKr + "\n" + "Virkestoff: " + virkestoff;
+    }
 }
 
 class Narkotisk extends Legemiddel{
