@@ -33,6 +33,10 @@ class Narkotisk extends Legemiddel{
         this.narkoStyrke = narkoStyrke;
     }
     public String hentNarkoStyrke(){ return narkoStyrke.toString();}
+
+    public String toString(){
+        return super.toString() + "\n" + "Narkotisk-styrke: " + narkoStyrke;   
+    }
 }
 
 class Vanedannende extends Legemiddel{
@@ -43,6 +47,10 @@ class Vanedannende extends Legemiddel{
         this.vaneStyrke = vaneStyrke;
     }
     public String hentVaneStyrke(){return vaneStyrke.toString();}
+    
+    public String toString(){
+        return super.toString() + "\n" + "Vanestyrke: " + vaneStyrke;   
+    }
 }
 
 class Vanlig extends Legemiddel{

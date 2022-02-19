@@ -29,6 +29,10 @@ public abstract class Resept {
     }
     abstract public String farge(); 
     abstract public int prisAaBetale();
+
+    public String toString(){
+        return "Legemiddel: " + legemiddelRef.hentNavn() + "\n" + "Lege: " + legeRef.hentNavn() + "\n" + "Pasient-ID" + pasientId + "\n" + "reit: " + reseptReit; 
+    }
     
 }
 
@@ -88,16 +92,5 @@ class BlaaResepter extends Resept{
     }
     public int prisAaBetale(){
         return (int) Math.round (legemiddelRef.hentPris()*0.25);
-    }
-}
-
-
-
-class Test{
-    public static void main(String[] args) {
-        Narkotisk narko = new Narkotisk("jo", 300, 20, 10);
-        Leger omid = new Leger("Omid");
-        MilResepter hasj = new MilResepter(narko, omid, narko.hentId());
-        
     }
 }
