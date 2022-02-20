@@ -1,6 +1,6 @@
 public abstract class Resept {
-    static int instanser = 0; 
-    int ID;
+    protected static int instanser = 0; 
+    protected int ID;
 
     protected Legemiddel legemiddelRef;
     protected Leger legeRef;
@@ -16,11 +16,11 @@ public abstract class Resept {
         instanser += 1;
     }
 
-    protected int hendId(){return ID;}
-    protected String hentLegemiddel(){return legemiddelRef.hentNavn();}
-    protected String hentLege(){return legeRef.hentNavn();}
-    protected int hentPasientId(){return pasientId;}
-    protected int hentReit(){return reseptReit;}
+    public int hendId(){return ID;}
+    public String hentLegemiddel(){return legemiddelRef.hentNavn();}
+    public String hentLege(){return legeRef.hentNavn();}
+    public int hentPasientId(){return pasientId;}
+    public int hentReit(){return reseptReit;}
 
     public boolean bruk(){
         if (reseptReit == 0){return false;}
@@ -31,7 +31,7 @@ public abstract class Resept {
     abstract public int prisAaBetale();
 
     public String toString(){
-        return "Legemiddel: " + legemiddelRef.hentNavn() + "\n" + "Lege: " + legeRef.hentNavn() + "\n" + "Pasient-ID" + pasientId + "\n" + "reit: " + reseptReit; 
+        return "Legemiddel: " + legemiddelRef.hentNavn() + "\n" + "Lege: " + legeRef.hentNavn() + "\n" + "Pasient-ID: " + pasientId + "\n" + "reit: " + reseptReit; 
     }
     
 }
@@ -50,21 +50,18 @@ class HviteResepter extends Resept{
     }
 }
 
-class MilResepter extends Resept{
+class MilResepter extends HviteResepter{
     
-    MilResepter(Legemiddel legemiddelRef, Leger legeRef, int pasientID){
+    public MilResepter(Legemiddel legemiddelRef, Leger legeRef, int pasientID){
         super(legemiddelRef, legeRef, pasientID, 3);
     }
     
-    public String farge(){
-        return "hvit";
-    }
     public int prisAaBetale(){
         return 0;
     }
 }
 
-class PResepter extends Resept{
+class PResepter extends HviteResepter{
     private static int rabatt = 108;
     
     public PResepter(Legemiddel legemiddelRef, Leger legeRef, int pasientID, int reseptReit){

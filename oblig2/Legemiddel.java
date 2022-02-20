@@ -1,5 +1,5 @@
 public abstract class Legemiddel{
-    static int instanser = 0;
+    protected static int instanser = 0;
     protected int ID;
 
     protected String navn;
@@ -17,12 +17,11 @@ public abstract class Legemiddel{
     public String hentNavn(){return navn;}
     public int hentPris(){return prisKr;}
     public double hentVirkestoff(){return virkestoff;}
-
-    public void settNyPris(int nyPris){prisKr = nyPris;}
-
     public String toString(){
         return "ID: " + ID + "\n" + "Navn: " + navn + "\n" + "Pris: " + prisKr + "\n" + "Virkestoff: " + virkestoff;
     }
+    public void settNyPris(int nyPris){prisKr = nyPris;}
+
 }
 
 class Narkotisk extends Legemiddel{
