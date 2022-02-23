@@ -5,11 +5,9 @@ public class Lenkeliste <T> implements Liste<T>{
     class Node{
         T data = null;
         Node next = null;
-        int indeks = 0;
         
         Node(T data){
             this.data = data;
-            indeks = entries + 1;
         }
     }
 
@@ -17,11 +15,11 @@ public class Lenkeliste <T> implements Liste<T>{
     public T hent() {return head.data;}
 
     public T fjern() {
+        if(entries == 0){throw new UgyldigListeindeks(0);}
         T slettetElement = head.data;
         Node peker = head;
 
         while(peker != null){
-            peker.indeks --;
             peker = peker.next;
         }
         
@@ -34,13 +32,14 @@ public class Lenkeliste <T> implements Liste<T>{
         StringBuilder svarStreng = new StringBuilder(); 
         Node peker = head;
         
-        while (peker != null){
-            svarStreng.append("Element " + peker.indeks + ": " + peker.data + "\n");
+        for (int i = 0; i<entries; i++){
+            svarStreng.append("Element " + (i+1) + ": " + peker.data + "\n");
             peker = peker.next;
         }
+
         return svarStreng.toString();
     }
-
+// overrid
     public void leggTil(T x){
         if (head == null){
             head = new Node(x);
@@ -66,18 +65,3 @@ interface Liste <T> {
     T fjern ();
 }
 
-class Kjor{
-    public static void main(String[] args) {
-        Lenkeliste<String> liste1 = new Lenkeliste<>();
-
-        liste1.leggTil("hei");
-        liste1.leggTil("hei du");
-        liste1.leggTil("hei verden");
-
-        System.out.println(liste1.toString());
-        System.err.println(liste1.stoerrelse());
-        System.out.println(liste1.fjern());
-        System.err.println(liste1.stoerrelse());
-        System.out.println(liste1.toString());
-    }
-}
