@@ -25,13 +25,13 @@ public abstract class Legemiddel{
 }
 
 class Narkotisk extends Legemiddel{
-    private Integer narkoStyrke;
+    private int narkoStyrke;
 
     public Narkotisk(String navn, int prisKr, double virkestoff, int narkoStyrke) {
         super(navn, prisKr, virkestoff);
         this.narkoStyrke = narkoStyrke;
     }
-    public String hentNarkoStyrke(){ return narkoStyrke.toString();}
+    public int hentNarkoStyrke(){ return narkoStyrke;}
 
     public String toString(){
         return super.toString() + "\n" + "Narkotisk-styrke: " + narkoStyrke;   
@@ -39,13 +39,13 @@ class Narkotisk extends Legemiddel{
 }
 
 class Vanedannende extends Legemiddel{
-    private Integer vaneStyrke;
+    private int vaneStyrke;
 
     public Vanedannende(String navn, int prisKr, double virkestoff, int vaneStyrke) {
         super(navn, prisKr, virkestoff);
         this.vaneStyrke = vaneStyrke;
     }
-    public String hentVaneStyrke(){return vaneStyrke.toString();}
+    public int hentVaneStyrke(){return vaneStyrke;}
     
     public String toString(){
         return super.toString() + "\n" + "Vanestyrke: " + vaneStyrke;   

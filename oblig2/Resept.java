@@ -68,10 +68,7 @@ class PResepter extends HviteResepter{
         super(legemiddelRef, legeRef, pasientID, reseptReit);
         System.out.println(hendId());
     }
-    
-    public String farge(){
-        return "hvit";
-    }
+
     public int prisAaBetale(){
         if (rabatt >= legemiddelRef.hentPris()){return 0;}
         return Math.round(legemiddelRef.hentPris() - rabatt);
