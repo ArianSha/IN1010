@@ -1,5 +1,3 @@
-import java.util.Optional;
-
 public class IndeksertListe<T> extends Lenkeliste<T> {
     
     public IndeksertListe(){
@@ -64,18 +62,22 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
     }
 
     public T fjern (int pos) {
-        if(pos >= stoerrelse() && pos < 0) throw new UgyldigListeindeks(pos);
+        if(pos >= stoerrelse() || pos < 0) throw new UgyldigListeindeks(pos);
         
         Node peker = head;
+        // peker er node bak
         for(int i = 0; i<pos-1; i++){
             peker = peker.next;
         }
         Node fjernetElement = peker.next;
+        
+        if(fjernetElement.next == null){
+            peker.next = null;
+            entries--;
+            return fjernetElement.data;
+        }
         peker.next = fjernetElement.next;
-    
         entries--;
         return fjernetElement.data;
     }
-     
-
 }

@@ -3,8 +3,8 @@ public class Lenkeliste <T> implements Liste<T>{
     int entries;
 
     class Node{
-        T data = null;
-        Node next = null;
+        public T data = null;
+        public Node next = null;
         
         Node(T data){
             this.data = data;
