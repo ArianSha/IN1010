@@ -1,11 +1,8 @@
-import org.w3c.dom.ranges.Range;
-
 public class Stabel<T> extends Lenkeliste<T>{
     public Stabel(){
         super();
     }
 
-    @Override
     public void leggTil(T x){
         if (head == null){
             head = new Node(x);
