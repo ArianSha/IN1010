@@ -3,6 +3,7 @@ public class Stabel<T> extends Lenkeliste<T>{
         super();
     }
 
+    @Override
     public void leggTil(T x){
         if (head == null){
             head = new Node(x);

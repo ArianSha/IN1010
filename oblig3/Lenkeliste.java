@@ -1,4 +1,4 @@
-public class Lenkeliste <T> implements Liste<T>{
+public abstract class Lenkeliste <T> implements Liste<T>{
     Node head;
     int entries;
 
@@ -14,8 +14,9 @@ public class Lenkeliste <T> implements Liste<T>{
     public int stoerrelse() {return entries;}
     public T hent() {return head.data;}
 
+    
     public T fjern() {
-        if(entries == 0){throw new UgyldigListeindeks(0);}
+        if(stoerrelse() == 0){throw new UgyldigListeindeks(-1);}
         T slettetElement = head.data;
         Node peker = head;
 
@@ -32,7 +33,7 @@ public class Lenkeliste <T> implements Liste<T>{
         StringBuilder svarStreng = new StringBuilder(); 
         Node peker = head;
         
-        for (int i = 0; i<entries; i++){
+        for (int i = 0; i<stoerrelse(); i++){
             svarStreng.append("Element " + (i+1) + ": " + peker.data + "\n");
             peker = peker.next;
         }

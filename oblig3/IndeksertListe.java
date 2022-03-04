@@ -3,10 +3,10 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
     public IndeksertListe(){
         super();
     }
-
+    
     public void leggTil (int pos, T x) {
         if(pos > stoerrelse() || pos < 0) throw new UgyldigListeindeks(pos);
-
+        
         if (pos == 0){
             if (head == null){
                 head = new Node(x);
@@ -26,7 +26,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
             peker = peker.next;
         }
         Node cur = peker.next;
-
+        
         peker.next = new Node(x);
         peker.next.next = cur;
         entries++;
@@ -34,7 +34,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
 
     public void sett (int pos, T x) {
         if(pos >= stoerrelse() || pos < 0) throw new UgyldigListeindeks(pos);
-
+        
         Node peker = head;
         // peker er node bak
         for (int i = 0; i<pos-1; i++){
@@ -53,15 +53,16 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
 
     public T hent (int pos) {
         if(pos >= stoerrelse() || pos < 0) throw new UgyldigListeindeks(pos);
-
+        
         Node peker = head;
         for (int i = 0; i<pos; i++){
             peker = peker.next;
         }
         return peker.data;
     }
-
+    
     public T fjern (int pos) {
+        if (stoerrelse() == 0) throw new UgyldigListeindeks(-1);
         if(pos >= stoerrelse() || pos < 0) throw new UgyldigListeindeks(pos);
         
         Node peker = head;

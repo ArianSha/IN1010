@@ -65,6 +65,7 @@ class TestPrioritetskoe {
 	k.leggTil("B");  k.leggTil("D");  k.leggTil("C");  k.leggTil("A");
 	k.leggTil("Z");  k.leggTil("X");
 	k.fjern();
+
 	String h1 = k.hent();
 	info(3, "Bruk av hent()");
 	if (h1.equals("B")) {
