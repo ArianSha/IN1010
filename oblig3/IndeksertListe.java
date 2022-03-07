@@ -32,6 +32,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
         entries++;
     }
 
+
     public void sett (int pos, T x) {
         if(pos >= stoerrelse() || pos < 0) throw new UgyldigListeindeks(pos);
         
@@ -51,6 +52,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
         peker.next.next = cur.next;
     }
 
+
     public T hent (int pos) {
         if(pos >= stoerrelse() || pos < 0) throw new UgyldigListeindeks(pos);
         
@@ -61,6 +63,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
         return peker.data;
     }
     
+
     public T fjern (int pos) {
         if (stoerrelse() == 0) throw new UgyldigListeindeks(-1);
         if(pos >= stoerrelse() || pos < 0) throw new UgyldigListeindeks(pos);

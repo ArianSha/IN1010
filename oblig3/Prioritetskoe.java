@@ -12,7 +12,7 @@ public class Prioritetskoe<T extends Comparable <T>> extends Lenkeliste<T>{
             return;
         }
 
-        if (x.compareTo(head.data) < 0){
+        else if (x.compareTo(head.data) < 0){
             Node prevHead = head;
             head = new Node (x);
             head.next = prevHead;
