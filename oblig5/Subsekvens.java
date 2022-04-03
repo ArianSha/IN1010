@@ -7,8 +7,12 @@ public class Subsekvens {
     }
 
     
-    public endreAnt(int nyAnt){
+    public void endreAnt(int nyAnt){
         subAnt = nyAnt;
+    }
+
+    public void leggTil(int ant){
+        subAnt =+ ant;
     }
 
 
@@ -17,8 +21,8 @@ public class Subsekvens {
     }
 
     
-    public toString(){
-        System.out.println(subsekvens + ", " + subAnt);
+    public String toString(){
+        return "(" + subsekvens + ", " + subAnt + ")";
     }
 
 }
