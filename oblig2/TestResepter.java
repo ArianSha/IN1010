@@ -8,17 +8,17 @@ public class TestResepter {
         PResepter resept3 = new PResepter(hasj, kiana, hasj.hentId(), 2);
         BlaaResepter resept4 = new BlaaResepter(hasj, kiana, hasj.hentId(), 5);
 
-        testVerdier.<String>testVerdi(resept1.hentLege(), "Kiana");
-        testVerdier.<Integer>testVerdi(resept2.prisAaBetale(), 0);
-        testVerdier.<String>testVerdi(resept3.farge(), "hvit");
-        testVerdier.<String>testVerdi(resept4.farge(), "blaa");
+        TestVerdier.<String>testVerdi(resept1.hentLege(), "Kiana");
+        TestVerdier.<Integer>testVerdi(resept2.prisAaBetale(), 0);
+        TestVerdier.<String>testVerdi(resept3.farge(), "hvit");
+        TestVerdier.<String>testVerdi(resept4.farge(), "blaa");
 
         System.out.println("Testen gikk fint, alle verdier gitt var riktig.");
         
     }
 }
 
-class testVerdier{
+class TestVerdier{
 
     public static <T> void testVerdi(T verdi, T forventetVerdi){
         if(!verdi.equals(forventetVerdi)){

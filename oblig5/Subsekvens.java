@@ -4,6 +4,7 @@ public class Subsekvens {
 
     public Subsekvens(String subsekvens){
         this.subsekvens = subsekvens;
+        subAnt = 1;
     }
 
     
@@ -11,8 +12,9 @@ public class Subsekvens {
         subAnt = nyAnt;
     }
 
-    public void leggTil(int ant){
-        subAnt =+ ant;
+    
+    public void leggTilAnt(int ant){
+        subAnt += ant;
     }
 
 

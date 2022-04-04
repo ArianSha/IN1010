@@ -12,9 +12,6 @@ public class SubsekvensRegister {
         registerListe.add(new HashMap<String, Subsekvens>() {{
             put(subsekvens, new Subsekvens(subsekvens));
         }});
-        // HashMap<String, Subsekvens> var = new HashMap<String, Subsekvens>();
-        // var.put(subsekvens, new Subsekvens(subsekvens));
-        // registerListe.add(var);
     }
     
 
@@ -61,6 +58,8 @@ public class SubsekvensRegister {
         
         catch(FileNotFoundException e){
             System.out.println("Filen finnes ikke");
+            e.printStackTrace();
+            // System.out.println();
         }
         
         catch(Exception e){
@@ -81,8 +80,9 @@ public class SubsekvensRegister {
     public static HashMap<String, Subsekvens> subsSmettng(HashMap<String, Subsekvens> mapEn, HashMap<String, Subsekvens> mapTo){
         for (Map.Entry<String, Subsekvens> entry: mapEn.entrySet()){
 
-            if(mapTo.containsKey(entry.getKey()) ) mapTo.get(entry.getKey()).leggTil(entry.getValue().hentAnt());
+            if(mapTo.containsKey(entry.getKey())) mapTo.get(entry.getKey()).leggTilAnt(1);
             else mapTo.put(entry.getKey(), entry.getValue());
+
         }
         return mapTo;
     }
