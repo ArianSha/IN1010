@@ -24,13 +24,12 @@ public class SubsekvensRegister {
         return registerListe.size();
     }
     
-
-    public static HashMap<String, Subsekvens> lesFil(String filnavn){
+    public static HashMap<String, Subsekvens> lesFil(String filNavn){
         HashMap<String, Subsekvens> persSubsekvens = new HashMap<>();
         Scanner leser = null;
 
         try{
-            leser = new Scanner(new File(filnavn));
+            leser = new Scanner(new File(filNavn));
             ArrayList<String> subsekvenser = new ArrayList<>();
             
             while(leser.hasNextLine()){
