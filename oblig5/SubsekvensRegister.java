@@ -6,12 +6,18 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class SubsekvensRegister {
-    ArrayList<HashMap<String, Subsekvens>> registerListe = new ArrayList<>();
+    public ArrayList<HashMap<String, Subsekvens>> registerListe = new ArrayList<>();
+
 
     public void settSub(String subsekvens){
         registerListe.add(new HashMap<String, Subsekvens>() {{
             put(subsekvens, new Subsekvens(subsekvens));
         }});
+    }
+
+
+    public void settSub(HashMap<String, Subsekvens> subsekvens){
+        registerListe.add(subsekvens);
     }
     
 
@@ -23,13 +29,14 @@ public class SubsekvensRegister {
     public int antSub(){
         return registerListe.size();
     }
+
     
-    public static HashMap<String, Subsekvens> lesFil(String filNavn){
+    public static HashMap<String, Subsekvens> lesFil(File fil){
         HashMap<String, Subsekvens> persSubsekvens = new HashMap<>();
         Scanner leser = null;
 
         try{
-            leser = new Scanner(new File(filNavn));
+            leser = new Scanner(fil);
             ArrayList<String> subsekvenser = new ArrayList<>();
             
             while(leser.hasNextLine()){
@@ -54,19 +61,16 @@ public class SubsekvensRegister {
                 }
             }
         }
-        
         catch(FileNotFoundException e){
             System.out.println("Filen finnes ikke");
             e.printStackTrace();
             // System.out.println();
         }
-        
         catch(Exception e){
             System.out.println("Filen kunne ikke tolkes");
             System.out.println(e.getMessage());
             System.exit(0);
         }
-        
         finally{
             if(leser != null){
                 leser.close(); 
@@ -79,7 +83,9 @@ public class SubsekvensRegister {
     public static HashMap<String, Subsekvens> subsSmettng(HashMap<String, Subsekvens> mapEn, HashMap<String, Subsekvens> mapTo){
         for (Map.Entry<String, Subsekvens> entry: mapEn.entrySet()){
 
-            if(mapTo.containsKey(entry.getKey())) mapTo.get(entry.getKey()).leggTilAnt(1);
+            if(mapTo.containsKey(entry.getKey())) {
+                mapTo.get(entry.getKey()).endreAnt(entry.getValue().hentAnt() + mapTo.get(entry.getKey()).hentAnt());
+            }
             else mapTo.put(entry.getKey(), entry.getValue());
 
         }
