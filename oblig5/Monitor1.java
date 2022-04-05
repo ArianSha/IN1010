@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class SubsekvensRegister {
-    private Buffer buf;
-    private Lock laas;
-    private Condition ikkeFull;
-    private Condition ikkeTom;
+public class Monitor1 {
+    private Lock laas = new ReentrantLock();
+    private Condition ledig = laas.newCondition();
+    private boolean ikkeKjort = true;
 
     public ArrayList<HashMap<String, Subsekvens>> registerListe = new ArrayList<>();
 
@@ -27,8 +27,9 @@ public class SubsekvensRegister {
     public void settSub(HashMap<String, Subsekvens> subsekvens){
         laas.lock();
         try{
-            if(buf.hasRemaining()){ikkeFull.await();}
+            while(ikkeKjort == true)ledig.await();
             registerListe.add(subsekvens);
+            ledig.signalAll();
         }
         catch(InterruptedException e) {
             System.out.println("got interrupted!");

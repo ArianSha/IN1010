@@ -39,7 +39,6 @@ public class Oblig5Del1 {
 
         for(int i = 0; i < register.antSub()-1; i++){
             smettetSubs = SubsekvensRegister.subsSmettng(smettetSubs, register.hentSub(i+1));
-
         }
         
         for(Map.Entry<String, Subsekvens> entry : smettetSubs.entrySet()) {
