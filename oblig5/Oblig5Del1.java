@@ -36,13 +36,11 @@ public class Oblig5Del1 {
         }
 
         HashMap<String, Subsekvens> smettetSubs = register.hentSub(0);
-        smettetSubs = SubsekvensRegister.subsSmettng(smettetSubs, register.hentSub(2));
-        smettetSubs = SubsekvensRegister.subsSmettng(smettetSubs, register.hentSub(1));
 
-        // for(int i = 0; i < register.antSub()-1; i++){
-        //     smettetSubs = SubsekvensRegister.subsSmettng(smettetSubs, register.hentSub(i+1));
+        for(int i = 0; i < register.antSub()-1; i++){
+            smettetSubs = SubsekvensRegister.subsSmettng(smettetSubs, register.hentSub(i+1));
 
-        // }
+        }
         
         for(Map.Entry<String, Subsekvens> entry : smettetSubs.entrySet()) {
                System.out.println(entry.toString());
