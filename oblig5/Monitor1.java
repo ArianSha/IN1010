@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +24,7 @@ public class Monitor1 {
 
 
     public void settSub(HashMap<String, Subsekvens> subsekvens){
+        ikkeKjort = false;
         laas.lock();
         try{
             while(ikkeKjort == true)ledig.await();
@@ -32,9 +32,9 @@ public class Monitor1 {
             ledig.signalAll();
         }
         catch(InterruptedException e) {
-            System.out.println("got interrupted!");
+            System.out.println("Traaden ble ikke gjennomfoert");
         }
-        finally{laas.unlock();}
+        finally{laas.unlock(); ikkeKjort = true;}
     }
     
 
