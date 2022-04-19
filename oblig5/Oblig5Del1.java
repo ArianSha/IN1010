@@ -1,22 +1,26 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Oblig5Del1 {
     public static void main(String[] args) {
         
-        Scanner mappeLeser = null;
+        BufferedReader mappeLeser = null;
         File folder = new File(args[0]);
         SubsekvensRegister register = new SubsekvensRegister();
-        
+
         try{
-            Arrays.stream(folder.list()).anyMatch("metadata.csv"::equals);
-            if (new File(folder, "metadata.csv").exists()){
-                mappeLeser = new Scanner( new File(folder, "metadata.csv"));
-                while (mappeLeser.hasNextLine()) register.settSub(SubsekvensRegister.lesFil(new File(folder.getPath() + "/" + mappeLeser.nextLine())));
+            if (Arrays.stream(folder.list()).anyMatch("metadata.csv"::equals)){
+                mappeLeser = new BufferedReader(new FileReader(new File(folder, "metadata.csv")));
+
+                for(String linje; (linje = mappeLeser.readLine()) != null;)
+                    register.settSub(SubsekvensRegister.lesFil(new File(folder.getPath() + "/" + linje)));
+                
             }
             else throw new Exception("metadata.csv ikke funnet");
     
@@ -29,21 +33,18 @@ public class Oblig5Del1 {
             System.out.println(e.getMessage());
         }
         finally{
-            if(mappeLeser!=null){
-                mappeLeser.close();
-
+            try{
+                if(mappeLeser!=null) mappeLeser.close();
             }
+            catch(IOException e){System.out.println("Feil under lesing");}
         }
 
         HashMap<String, Subsekvens> smettetSubs = register.hentSub(0);
 
-        for(int i = 0; i < register.antSub()-1; i++){
-            smettetSubs = SubsekvensRegister.subsSmettng(smettetSubs, register.hentSub(i+1));
-        }
+        for(int i = 1; i < register.antSub(); i++)
+            smettetSubs = SubsekvensRegister.subsSmettng(smettetSubs, register.hentSub(i));
         
-        for(Map.Entry<String, Subsekvens> entry : smettetSubs.entrySet()) {
+        for(Map.Entry<String, Subsekvens> entry : smettetSubs.entrySet()) 
                System.out.println(entry.toString());
-            }
-
     }
 }

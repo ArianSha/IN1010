@@ -1,39 +1,16 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 
 public class SubsekvensRegister {
-    private Buffer buf;
-    private Lock laas;
-    private Condition ikkeFull;
-    private Condition ikkeTom;
-
+    
     public ArrayList<HashMap<String, Subsekvens>> registerListe = new ArrayList<>();
 
-
-    public void settSub(String subsekvens){
-        registerListe.add(new HashMap<String, Subsekvens>() {{
-            put(subsekvens, new Subsekvens(subsekvens));
-        }});
-    }
-
-
+    
     public void settSub(HashMap<String, Subsekvens> subsekvens){
-        laas.lock();
-        try{
-            if(buf.hasRemaining()){ikkeFull.await();}
             registerListe.add(subsekvens);
-        }
-        catch(InterruptedException e) {
-            System.out.println("got interrupted!");
-        }
-        finally{laas.unlock();}
     }
     
 
@@ -46,41 +23,30 @@ public class SubsekvensRegister {
         return registerListe.size();
     }
 
-    
+
     public static HashMap<String, Subsekvens> lesFil(File fil){
-        HashMap<String, Subsekvens> persSubsekvens = new HashMap<>();
+        HashMap<String, Subsekvens> personSubsekvens = new HashMap<>();
         Scanner leser = null;
 
         try{
             leser = new Scanner(fil);
-            ArrayList<String> subsekvenser = new ArrayList<>();
             
             while(leser.hasNextLine()){
                 String linje = leser.nextLine();
-                int startSub = 0;
 
                 if (linje.isEmpty()) break;
-                if (linje.isEmpty() && persSubsekvens.isEmpty()) throw new Exception("Filen er tom");
+                if (linje.isEmpty() && personSubsekvens.isEmpty()) throw new Exception("Filen er tom");
                 if(linje.length() < 3) throw new Exception("substreng må være 3 karakterer");
                 
-                while (! (startSub+2 == linje.length())){
-                    StringBuilder sekvensBuilder = new StringBuilder();
-                    for(int i = 0; i<3; i++) sekvensBuilder.append(linje.charAt(startSub+i));
-                    
-                    String sekvens = sekvensBuilder.toString();
-                    startSub++;
-                    
-                    if(! subsekvenser.contains(sekvens.toString())){
-                        persSubsekvens.put(sekvens, new Subsekvens(sekvens));
-                        subsekvenser.add(sekvens);
-                    }
+                for(int sekvensStartIndex = 0; sekvensStartIndex+2 < linje.length(); sekvensStartIndex++){
+                    String sekvens = linje.substring(sekvensStartIndex, sekvensStartIndex + 3);
+                    personSubsekvens.put(sekvens, new Subsekvens(sekvens));
                 }
             }
         }
         catch(FileNotFoundException e){
             System.out.println("Filen finnes ikke");
             e.printStackTrace();
-            // System.out.println();
         }
         catch(Exception e){
             System.out.println("Filen kunne ikke tolkes");
@@ -92,18 +58,19 @@ public class SubsekvensRegister {
                 leser.close(); 
             }
         }
-        return persSubsekvens;
+        return personSubsekvens;
     }
 
 
-    public static HashMap<String, Subsekvens> subsSmettng(HashMap<String, Subsekvens> mapEn, HashMap<String, Subsekvens> mapTo){
-        for (Map.Entry<String, Subsekvens> entry: mapEn.entrySet()){
+    public static HashMap<String, Subsekvens> subsSmettng(HashMap<String, Subsekvens> mapEn, HashMap<String, Subsekvens> mapTo) {
+        for (String subsekvens : mapEn.keySet()) {
 
-            if(mapTo.containsKey(entry.getKey())) {
-                mapTo.get(entry.getKey()).endreAnt(entry.getValue().hentAnt() + mapTo.get(entry.getKey()).hentAnt());
+            if(mapTo.containsKey(subsekvens)) {
+                int antallFraMapEn = mapEn.get(subsekvens).hentAnt();
+                mapTo.get(subsekvens).leggTilAnt(antallFraMapEn);
             }
-            else mapTo.put(entry.getKey(), entry.getValue());
-
+            else
+                mapTo.put(subsekvens, mapEn.get(subsekvens));
         }
         return mapTo;
     }

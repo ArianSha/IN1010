@@ -6,12 +6,7 @@ public class Subsekvens {
         this.subsekvens = subsekvens;
         subAnt = 1;
     }
-
     
-    public void endreAnt(int nyAnt){
-        subAnt = nyAnt;
-    }
-
     
     public void leggTilAnt(int ant){
         subAnt += ant;
