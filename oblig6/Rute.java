@@ -6,6 +6,7 @@ public abstract class Rute {
     int radNr;
     int kolonneNr;
     Labyrint labyrint;
+    boolean besoekt = false;
     List<Rute> naboer = new ArrayList<Rute>();
 
 

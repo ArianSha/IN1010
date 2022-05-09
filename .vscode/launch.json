@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Gui",
+            "request": "launch",
+            "mainClass": "Gui",
+            "projectName": "IN1010_e3944c13"
+        },
+        {
+            "type": "java",
+            "name": "Launch Oblig6",
+            "request": "launch",
+            "mainClass": "Oblig6",
+            "projectName": "IN1010_e3944c13"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

@@ -1,7 +1,9 @@
 {
     "java.project.sourcePaths": [
+        "oblig6",
+        "oblig5",
         "oblig3",
         "oblig2",
-        "oblig5"
+        "oblig7"
     ]
 }

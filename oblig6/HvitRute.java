@@ -7,6 +7,10 @@ public class HvitRute extends Rute{
 
     @Override
     public void finn(Rute fra) {
+        if (this.besoekt)
+            return;
+
+        this.besoekt = true;
 
         for(Rute nabo: naboer) {
             if (nabo != fra)
