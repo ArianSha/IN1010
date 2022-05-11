@@ -25,7 +25,7 @@ public class SnakeGame {
         Rute[][] ruter = new Rutenett().lagRuteNett();
         JPanel ruteNett = SnakeGame.skrivRuteNett(ruter);
         Rute startRute = ruter[5][6];
-        Slange slange = new Slange(startRute);
+        Slange slange = new Slange(5, 6, ruter);
         JPanel header = SnakeGame.lagHeader(vindu, slange); 
 
         vindu.add(header, BorderLayout.NORTH);
@@ -50,11 +50,19 @@ public class SnakeGame {
         JButton venstreKnapp = new JButton("venstre");
         JButton hoyreKnapp = new JButton("høyre");
         JButton nedKnapp = new JButton("ned");
-
-        oppKnapp.addActionListener(slange);
-        venstreKnapp.addActionListener(slange);
-        hoyreKnapp.addActionListener(slange);
-        nedKnapp.addActionListener(slange);
+        
+        oppKnapp.setActionCommand("opp");
+        venstreKnapp.setActionCommand("venstre");
+        hoyreKnapp.setActionCommand("hoyre");
+        nedKnapp.setActionCommand("ned");
+        
+        Kontroll kontroll = new Kontroll(slange);
+        // Timer timer = new Timer(4000, kontroll);
+        // timer.start();
+        oppKnapp.addActionListener(kontroll);
+        venstreKnapp.addActionListener(kontroll);
+        hoyreKnapp.addActionListener(kontroll);
+        nedKnapp.addActionListener(kontroll);
         
         kontroller.add(oppKnapp, BorderLayout.NORTH);
         kontroller.add(venstreKnapp, BorderLayout.WEST);

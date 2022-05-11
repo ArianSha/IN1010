@@ -1,7 +1,4 @@
-import java.awt.*;
 import java.util.Random;
-import javax.swing.*;
-
 
 public class Rutenett {
 
@@ -10,50 +7,51 @@ public class Rutenett {
 
     public Rute[][] lagRuteNett(){
         
-        for(int x = 0; x < 12; x++){
-            for (int y = 0; y < 12; y++ ){
+        for(int rader = 0; rader < 12; rader++){
+            for (int kolonner = 0; kolonner < 12; kolonner++ ){
                 Rute rute = new Rute();
-                ruter[x][y] = rute; 
+                ruter[rader][kolonner] = rute; 
             }
         }
 
-        this.lagTilFeldigSkatter(ruter, 10);
+        this.lagTilFeldigSkatter(10);
         this.linkNaboer();
         return ruter;
     }
 
 
-    private void lagTilFeldigSkatter(Rute[][] ruter, int antallSkatter){
+    private void lagTilFeldigSkatter(int antallSkatter){
 
         for(int i = 0; i < antallSkatter; i++)
-            Rutenett.leggTilfeldigSkatt(ruter);
+            leggTilfeldigSkatt();
     }
 
 
-    private static void leggTilfeldigSkatt(Rute[][] ruter){
+    private void leggTilfeldigSkatt(){
         Random tilfeldigKordinat = new Random();
 
         int tilfeldigX = tilfeldigKordinat.nextInt((11)+1);
         int tilfeldigY= tilfeldigKordinat.nextInt((11)+1);
 
-        if(ruter[tilfeldigX][tilfeldigX] instanceof SkattRute)
-            Rutenett.leggTilfeldigSkatt(ruter);
+        if(ruter[tilfeldigX][tilfeldigX].skattRute == true)
+            this.leggTilfeldigSkatt();
             
         else if(tilfeldigX == 5 && tilfeldigY == 6)
-            Rutenett.leggTilfeldigSkatt(ruter);
+            this.leggTilfeldigSkatt();
 
-        else
-            ruter[tilfeldigX][tilfeldigY] = new SkattRute();
-
+        else{
+            Rute rute = new Rute();
+            rute.omgjorSkattRute();
+            ruter[tilfeldigX][tilfeldigY] = rute;
+        }
     }
 
 
     private void linkNaboer(){
-        for(int rad = 0; rad < 12; rad++){
-            for(int kolonne = 0; kolonne < 12; kolonne++) {
+        for(int rad = 0; rad < 12; rad++)
+            for(int kolonne = 0; kolonne < 12; kolonne++) 
                 leggTilNaboer(rad, kolonne);
-            }
-        }   
+           
     }
 
     
@@ -63,13 +61,13 @@ public class Rutenett {
         if (rad - 1 >= 0)
             rute.naboNord = ruter[rad-1][kolonne];
 
-        if (rad + 1 < 11)
+        if (rad + 1 < 12)
             rute.naboSor = ruter[rad+1][kolonne];
 
         if (kolonne - 1 >= 0)
             rute.naboVest = ruter[rad][kolonne-1];
 
-        if (kolonne + 1 < 11)
+        if (kolonne + 1 < 12)
             rute.naboOst = ruter[rad][kolonne+1];
     }
 }

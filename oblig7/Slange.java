@@ -1,59 +1,60 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Slange implements ActionListener {
+public class Slange {
     
-    int slangeLengde;
+    int startRad;
+    int startKollone;
     Rute hodeRute;
     Rute hale;
+    Rute[][] ruter;
     ArrayList<Rute> slangeRuter = new ArrayList<>();
 
 
-    public Slange(Rute rute){
-        rute.setBackground(Color.GREEN);
-        hodeRute = rute;
-        hale = rute;
-        slangeRuter.add(hodeRute);
-        slangeLengde = 1;
-    }
-
-
-    public void leggTilRute(Rute rute){
-        rute.setBackground(Color.GREEN);
-        hodeRute = rute;
+    public Slange(int startRad, int startKollone, Rute[][] ruter){
+    
+        hale = hodeRute = ruter[startRad][startKollone];
+        hodeRute.setBackground(Color.GREEN);
         slangeRuter.add(hodeRute);
     }
 
 
-    public void flyttRute(Rute fra, Rute til){
-
+    private void leggTilRute(Rute rute){
+        rute.setBackground(Color.GREEN);
+        hodeRute = rute;
+        slangeRuter.add(hodeRute);
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e){
+    public void flyttRute(Rute til){
         
-        if(e.getActionCommand().equals("oppKnapp")){
-            // while(true){
-            //     try{
-            //         Thread.sleep(2000);
-            //         this.flyttRute(hodeRute, til);
-            //         hodeRute
-            //     }
-            // }
+        if (til == null){
+            System.out.println("du gikk ut");
+            System.exit(0);
         }
-        else if(e.getActionCommand().equals("venstreKnapp")){
 
-        }
-        else if(e.getActionCommand().equals("hoyreKnapp")){
+        else if(til.skattRute == true){
 
-        }
-        else if(e.getActionCommand().equals("nedKnapp")){
-
-        }
-        else
+            til.omgjorHvitRute(til.naboNord, til.naboVest, til.naboOst, til.naboSor);
+            this.leggTilRute(til);
             return;
+        }
+
+        else{
+            this.leggTilRute(til);
+            this.fjernRute(hale);
+        }
     }
+
+
+    private Rute fjernRute(Rute rute){
+
+        hale.setBackground(Color.WHITE);
+
+        Rute gammelHale = slangeRuter.remove(0);
+        hale = slangeRuter.get(0);
+
+        return gammelHale;
+    }
+
 }
