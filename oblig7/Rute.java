@@ -20,53 +20,24 @@ public class Rute extends JLabel{
     }
 
 
-    public void omgjorHvitRute(Rute naboNord, Rute naboVest, Rute naboOst, Rute naboSor){
+    public void omgjorHvitRute(){
         skattRute = false;
 
         super.setText("");
         super.setBackground(Color.WHITE);
-        this.omgjorNaboer(naboNord, naboVest, naboOst, naboSor);
     }
     
 
     public void omgjorSkattRute(){
         skattRute = true;
-
-        super.removeAll();
-        super.setForeground(Color.RED);
-        super.setText("$");
-    }
-    
-
-    public void omgjorSkattRute(Rute naboNord, Rute naboVest, Rute naboOst, Rute naboSor){
-        skattRute = true;
         super.removeAll();
         
         super.setForeground(Color.RED);
         super.setText("$");
-        
-        this.omgjorNaboer(naboNord, naboVest, naboOst, naboSor);
-        
     }
-    
-    
-    private void omgjorNaboer(Rute naboNord, Rute naboVest, Rute naboOst, Rute naboSor){
 
-        this.naboNord = naboNord;
-        this.naboVest = naboVest;
-        this.naboSor = naboSor;
-        this.naboOst = naboOst;
 
-        if(naboNord != null)
-            naboNord.naboSor = this;
-        
-        if(naboOst != null)
-            naboVest.naboOst = this;
-        
-        if(naboOst != null)
-            naboOst.naboVest = this;
-
-        if(naboSor != null)
-            naboSor.naboNord = this;
+    public void omgjorSlangeRute(){
+        this.setBackground(Color.green);
     }
 }

@@ -1,36 +1,46 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
 
 public class Kontroll implements ActionListener{
     
     Slange slange;
-    String sisteKommando = "n";
+    String sisteKommando = "";
+    String kommando = "";
+    int tasteTrykk = 0;
+
 
     public Kontroll(Slange slange){
         this.slange = slange;
     }
-    
-    
-    public void actionPerformed(ActionEvent e){
 
-        System.out.println(e.getActionCommand());
-        if(e.getActionCommand().equals("opp") && ! (sisteKommando.equals("ned"))){
+
+    public void actionPerformed(ActionEvent e){
+        
+        // System.out.println(e.getActionCommand());
+        if((kommando.equals("opp") || tasteTrykk == 38) && ! sisteKommando.equals("ned")){
+            
             this.bevegOpp();
-            sisteKommando = e.getActionCommand();
+            sisteKommando = "opp"; 
         }
-        else if(e.getActionCommand().equals("venstre") && !sisteKommando.equals("hoyre")){
+        else if((kommando.equals("venstre") || tasteTrykk == 37) && ! sisteKommando.equals("hoyre")){
+            
             this.bevegVenstre();
-            sisteKommando = e.getActionCommand();
+            sisteKommando = "venstre";
         }
-        else if(e.getActionCommand().equals("hoyre") && !sisteKommando.equals("venstre")){
+        else if((kommando.equals("hoyre") || tasteTrykk == 39) && ! sisteKommando.equals("venstre")){
+            
             this.bevegHoyre();
-            sisteKommando = e.getActionCommand();
+            sisteKommando = "hoyre";
         }
-        else if(e.getActionCommand().equals("ned") && !sisteKommando.equals("opp")){
+        else if((kommando.equals("ned") || tasteTrykk == 40) && ! sisteKommando.equals("opp")){
+            
             this.bevegNed();
-            sisteKommando = e.getActionCommand();
+            sisteKommando = "ned";
         }
+        // else{
+        //     kommando = sisteKommando;
+        //     this.actionPerformed(e);
+        // }
     }
 
 
@@ -80,7 +90,4 @@ public class Kontroll implements ActionListener{
             System.exit(0);
         }
     }
-
-
-
 }

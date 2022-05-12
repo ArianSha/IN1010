@@ -1,6 +1,4 @@
-import java.awt.*;
 import javax.swing.*;
-
 
 public class SnakeGame {
 
@@ -16,72 +14,21 @@ public class SnakeGame {
             System.out.println("Noe galt skjedde");
             System.exit(0);
         }
-            
+
         JFrame vindu = new JFrame("Snake Game");
         vindu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         vindu.setSize(700,700);
         vindu.setLocationRelativeTo(null);
         
-        Rute[][] ruter = new Rutenett().lagRuteNett();
-        JPanel ruteNett = SnakeGame.skrivRuteNett(ruter);
-        Rute startRute = ruter[5][6];
-        Slange slange = new Slange(5, 6, ruter);
-        JPanel header = SnakeGame.lagHeader(vindu, slange); 
+        Rute[][] ruter = new Rutenett(5, 6, 12).lagRuteNett();
+        Gui GUI = new Gui(vindu, ruter);
+        Slange slange = new Slange(5, 6, ruter, GUI.score);
 
-        vindu.add(header, BorderLayout.NORTH);
-        vindu.add(ruteNett);
+        GUI.lagHeader(); 
+        GUI.skrivRuteNett();
+        GUI.leggTilKontroller(slange);
         
+
         vindu.setVisible(true);
-    }
-
-
-    private static JPanel lagHeader(JFrame vindu, Slange slange){
-        JPanel header = new JPanel();
-        JLabel score = new JLabel();
-        JPanel kontroller = new JPanel();
-
-        header.setLayout(new BorderLayout());
-        header.add(score, BorderLayout.WEST);
-        header.add(kontroller);
-
-        score.setText("Poeng: 0");
-
-        JButton oppKnapp = new JButton("opp");
-        JButton venstreKnapp = new JButton("venstre");
-        JButton hoyreKnapp = new JButton("høyre");
-        JButton nedKnapp = new JButton("ned");
-        
-        oppKnapp.setActionCommand("opp");
-        venstreKnapp.setActionCommand("venstre");
-        hoyreKnapp.setActionCommand("hoyre");
-        nedKnapp.setActionCommand("ned");
-        
-        Kontroll kontroll = new Kontroll(slange);
-        // Timer timer = new Timer(4000, kontroll);
-        // timer.start();
-        oppKnapp.addActionListener(kontroll);
-        venstreKnapp.addActionListener(kontroll);
-        hoyreKnapp.addActionListener(kontroll);
-        nedKnapp.addActionListener(kontroll);
-        
-        kontroller.add(oppKnapp, BorderLayout.NORTH);
-        kontroller.add(venstreKnapp, BorderLayout.WEST);
-        kontroller.add(hoyreKnapp, BorderLayout.EAST);    
-        kontroller.add(nedKnapp, BorderLayout.SOUTH);
-        return header;
-    }
-
-
-    private static JPanel skrivRuteNett(Rute[][] ruter){
-        
-        JPanel ruteNett = new JPanel();
-        ruteNett.setLayout(new GridLayout(12,12));
-        
-        for(Rute[] ruteKolonne: ruter){
-            for(Rute rute: ruteKolonne)
-                ruteNett.add(rute);
-        }
-
-        return ruteNett;
     }
 }

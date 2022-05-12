@@ -1,26 +1,33 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.JLabel;
 
 public class Slange {
     
-    int startRad;
-    int startKollone;
+    JLabel score;
+    int poeng = 1;
     Rute hodeRute;
-    Rute hale;
+    Rute haleRute;
     Rute[][] ruter;
     ArrayList<Rute> slangeRuter = new ArrayList<>();
 
 
-    public Slange(int startRad, int startKollone, Rute[][] ruter){
-    
-        hale = hodeRute = ruter[startRad][startKollone];
-        hodeRute.setBackground(Color.GREEN);
+    public Slange(int startRad, int startKollone, Rute[][] ruter, JLabel score){
+
+        this.score = score;
+        this.ruter = ruter;
+        haleRute = hodeRute = ruter[startRad][startKollone];
+
+        hodeRute.omgjorSlangeRute();
         slangeRuter.add(hodeRute);
     }
 
 
     private void leggTilRute(Rute rute){
-        rute.setBackground(Color.GREEN);
+
+        rute.omgjorSlangeRute();
         hodeRute = rute;
         slangeRuter.add(hodeRute);
     }
@@ -28,33 +35,51 @@ public class Slange {
 
     public void flyttRute(Rute til){
         
-        if (til == null){
+        if (til == null || slangeRuter.contains(til)){
             System.out.println("du gikk ut");
             System.exit(0);
         }
 
         else if(til.skattRute == true){
 
-            til.omgjorHvitRute(til.naboNord, til.naboVest, til.naboOst, til.naboSor);
+            til.omgjorHvitRute();
             this.leggTilRute(til);
-            return;
+            this.leggTilNySkatt();
+            score.setText("score: " + poeng++);
         }
 
         else{
             this.leggTilRute(til);
-            this.fjernRute(hale);
+            this.fjernHale();
         }
     }
 
 
-    private Rute fjernRute(Rute rute){
+    private void fjernHale(){
 
-        hale.setBackground(Color.WHITE);
+        haleRute.omgjorHvitRute();
 
-        Rute gammelHale = slangeRuter.remove(0);
-        hale = slangeRuter.get(0);
+        slangeRuter.remove(0);
+        haleRute = slangeRuter.get(0);
+    }
 
-        return gammelHale;
+
+    private void leggTilNySkatt(){
+        Random tilfeldigKordinat = new Random();
+
+        int tilfeldigX = tilfeldigKordinat.nextInt((11)+1);
+        int tilfeldigY= tilfeldigKordinat.nextInt((11)+1);
+
+        if(ruter[tilfeldigX][tilfeldigY].skattRute == true)
+            this.leggTilNySkatt();
+            
+        else if(slangeRuter.contains(ruter[tilfeldigX][tilfeldigY]))
+            this.leggTilNySkatt();
+
+        else{
+            Rute rute = ruter[tilfeldigX][tilfeldigY];
+            rute.omgjorSkattRute();
+        }
     }
 
 }
