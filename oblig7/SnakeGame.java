@@ -17,10 +17,10 @@ public class SnakeGame {
 
         JFrame vindu = new JFrame("Snake Game");
         vindu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        vindu.setSize(700,700);
+        vindu.setSize(800,800);
         vindu.setLocationRelativeTo(null);
         
-        Rute[][] ruter = new Rutenett(5, 6, 12).lagRuteNett();
+        Rute[][] ruter = new Rutenett(5, 6).lagRuteNett();
         Gui GUI = new Gui(vindu, ruter);
         Slange slange = new Slange(5, 6, ruter, GUI.score);
 
@@ -28,7 +28,6 @@ public class SnakeGame {
         GUI.skrivRuteNett();
         GUI.leggTilKontroller(slange);
         
-
         vindu.setVisible(true);
     }
 }

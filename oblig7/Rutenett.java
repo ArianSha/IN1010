@@ -5,22 +5,20 @@ public class Rutenett {
 
     int startRad;
     int startKollone;
-    int antRuter;
     Rute[][] ruter;
 
-    public Rutenett(int startRad, int startKollone, int antRuter){
+    public Rutenett(int startRad, int startKollone){
 
         this.startRad = startRad;
         this.startKollone = startKollone;
-        this.antRuter = antRuter;
-        ruter = new Rute[antRuter][antRuter]; 
+        ruter = new Rute[12][12]; 
     }
     
 
     public Rute[][] lagRuteNett(){
         
-        for(int rader = 0; rader < antRuter; rader++){
-            for (int kolonner = 0; kolonner < antRuter; kolonner++ ){
+        for(int rader = 0; rader < 12; rader++){
+            for (int kolonner = 0; kolonner < 12; kolonner++ ){
 
                 Rute rute = new Rute();
                 ruter[rader][kolonner] = rute; 
@@ -43,8 +41,8 @@ public class Rutenett {
     private void leggTilfeldigSkatt(){
         Random tilfeldigKordinat = new Random();
 
-        int tilfeldigX = tilfeldigKordinat.nextInt((antRuter - 1)+1);
-        int tilfeldigY= tilfeldigKordinat.nextInt((antRuter - 1)+1);
+        int tilfeldigX = tilfeldigKordinat.nextInt((12 - 1)+1);
+        int tilfeldigY= tilfeldigKordinat.nextInt((12 - 1)+1);
 
         if(ruter[tilfeldigX][tilfeldigY].skattRute == true)
             this.leggTilfeldigSkatt();
@@ -62,8 +60,8 @@ public class Rutenett {
 
     private void linkNaboer(){
 
-        for(int rad = 0; rad < antRuter; rad++)
-            for(int kolonne = 0; kolonne < antRuter; kolonne++) 
+        for(int rad = 0; rad < 12; rad++)
+            for(int kolonne = 0; kolonne < 12; kolonne++) 
 
                 leggTilNaboer(rad, kolonne);
     }
@@ -75,13 +73,13 @@ public class Rutenett {
         if (rad - 1 >= 0)
             rute.naboNord = ruter[rad-1][kolonne];
 
-        if (rad + 1 < antRuter)
+        if (rad + 1 < 12)
             rute.naboSor = ruter[rad+1][kolonne];
 
         if (kolonne - 1 >= 0)
             rute.naboVest = ruter[rad][kolonne-1];
 
-        if (kolonne + 1 < antRuter)
+        if (kolonne + 1 < 12)
             rute.naboOst = ruter[rad][kolonne+1];
     }
 }

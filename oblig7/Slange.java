@@ -2,14 +2,21 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Slange {
     
     JLabel score;
     int poeng = 1;
+
     Rute hodeRute;
     Rute haleRute;
+
+    Clip lyd;
+    ImageIcon SIUUU;
+
     Rute[][] ruter;
     ArrayList<Rute> slangeRuter = new ArrayList<>();
 
@@ -22,13 +29,20 @@ public class Slange {
 
         hodeRute.omgjorSlangeRute();
         slangeRuter.add(hodeRute);
+        
+        Image bilde = new ImageIcon("SIUUU.jpg").getImage();
+        SIUUU = new ImageIcon(bilde.getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+        hodeRute.setIcon(SIUUU);
     }
-
-
+    
+    
     private void leggTilRute(Rute rute){
-
+        
         rute.omgjorSlangeRute();
+        hodeRute.setIcon(null);
         hodeRute = rute;
+
+        hodeRute.setIcon(SIUUU);
         slangeRuter.add(hodeRute);
     }
 
@@ -41,9 +55,9 @@ public class Slange {
         }
 
         else if(til.skattRute == true){
-
-            til.omgjorHvitRute();
+            // til.omgjorHvitRute();
             this.leggTilRute(til);
+            
             this.leggTilNySkatt();
             score.setText("score: " + poeng++);
         }
@@ -81,5 +95,4 @@ public class Slange {
             rute.omgjorSkattRute();
         }
     }
-
 }

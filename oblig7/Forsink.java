@@ -1,10 +1,8 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.Timer;
 
-public class Forsink implements ActionListener, KeyListener{
+public class Forsink implements KeyListener{
 
     int forsinkelse;
     Kontroll kontroll;
@@ -17,14 +15,6 @@ public class Forsink implements ActionListener, KeyListener{
 
         this.kontroll = new Kontroll(slange);
         timer = new Timer(forsinkelse, kontroll);
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        kontroll.kommando = e.getActionCommand();
-        timer.start();
     }
 
 
@@ -46,5 +36,4 @@ public class Forsink implements ActionListener, KeyListener{
     public void keyTyped(KeyEvent e) {
         
     }
-    
 }
